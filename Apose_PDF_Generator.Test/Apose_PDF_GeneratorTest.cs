@@ -55,7 +55,7 @@ namespace Apose_PDF_Generator.Test
         }
 
         [Test]
-        [Ignore("this test must fail but it pass due security issues on apose")]
+        [Ignore("this test should fail but its passing due to unhandle exception in api")]
         public void UpdateSingleFieldOfTheDocumentOnAsposeCloud_GivenFilename_ReadOnlyField_And_value_ShouldThrowExceptionNotUpdate()
         {
             var sut = new AsposePdfApi();
