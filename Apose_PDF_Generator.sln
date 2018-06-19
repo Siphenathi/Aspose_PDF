@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator", "Apose_PDF_Generator\Apose_PDF_Generator.csproj", "{ADB00125-F8C1-4FBE-BF15-AAB3B5699FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator.Test", "Apose_PDF_Generator.Test\Apose_PDF_Generator.Test.csproj", "{0B723330-A762-4D94-9BE1-5899DF6D57E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator.Service", "Apose_PDF_Generator.Business\Apose_PDF_Generator.Service.csproj", "{62638538-3F81-4513-89B5-348797D3D020}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADB00125-F8C1-4FBE-BF15-AAB3B5699FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB00125-F8C1-4FBE-BF15-AAB3B5699FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB00125-F8C1-4FBE-BF15-AAB3B5699FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB00125-F8C1-4FBE-BF15-AAB3B5699FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B723330-A762-4D94-9BE1-5899DF6D57E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B723330-A762-4D94-9BE1-5899DF6D57E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B723330-A762-4D94-9BE1-5899DF6D57E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B723330-A762-4D94-9BE1-5899DF6D57E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62638538-3F81-4513-89B5-348797D3D020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62638538-3F81-4513-89B5-348797D3D020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62638538-3F81-4513-89B5-348797D3D020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62638538-3F81-4513-89B5-348797D3D020}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {189E8AB9-9E46-41F2-A205-736E90CA98BA}
+	EndGlobalSection
+EndGlobal
