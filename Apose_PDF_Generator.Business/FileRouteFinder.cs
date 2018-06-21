@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Apose_PDF_Generator.Service
 {
-    public class Common
+    public class FileRouteFinder
     {
-        public static string GetDataDirectory()
+        public static string GetDirectoryOfTheMainDocument()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory + "Documents\\Aspose_by_Siphenathi_2.pdf"; 
             return path;
@@ -19,6 +19,12 @@ namespace Apose_PDF_Generator.Service
         {
             var path = AppDomain.CurrentDomain.BaseDirectory + "Documents\\Document.pdf";
             return path;                        
+        }
+
+        public static string GetDirectoryToStoreTheDocumentWithDisableProperties()
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "Documents\\Aspose_by_Siphenathi_2(Readonly).pdf";
+            return path;
         }
     }
 }

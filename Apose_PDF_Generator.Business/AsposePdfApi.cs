@@ -24,9 +24,9 @@ namespace Apose_PDF_Generator.Service
             _target = new PdfApi(apiKey, appSid);
 
         }
-        public UploadResultsModel UploadToAsposeCloud(string path)
+        public UploadResultsTransferObject UploadToAsposeCloud(string path)
         {
-            var results = new UploadResultsModel();
+            var results = new UploadResultsTransferObject();
             if (Invalid(path))
             {
                 results.ErrorMessage = "Invalid file path";
@@ -47,9 +47,9 @@ namespace Apose_PDF_Generator.Service
             }
             return results;
         }
-        public DownloadResultsModel DownloadDocumentFromTheCloud(string name, string path)
+        public DownloadResultsTransferObject DownloadDocumentFromTheCloud(string name, string path)
         {
-            var results = new DownloadResultsModel();
+            var results = new DownloadResultsTransferObject();
 
             if (Invalid(name))
             {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Apose_PDF_Generator.Model;
 using Aspose.Pdf.Cloud.Sdk.Model;
 using Aspose.Storage.Cloud.Sdk.Model;
 
-namespace Apose_PDF_Generator.Service
+namespace Apose_PDF_Generator.Boundary
 {
     public interface IAsposePdfApi
     {

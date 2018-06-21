@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Apose_PDF_Generator.Model
 {
-    public class DownloadResultsModel
+    public class DownloadResultsTransferObject
     {
         public byte[] Bytes { get; set; }
         public string ErrorMessage { get; set; }

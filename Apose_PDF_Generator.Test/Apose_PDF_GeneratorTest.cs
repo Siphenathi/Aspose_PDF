@@ -16,7 +16,7 @@ namespace Apose_PDF_Generator.Test
         {
             //Arrange
             var sut = GreateAsposeApi();
-            var filePath = Common.GetDataDirectory();
+            var filePath = FileRouteFinder.GetDirectoryOfTheMainDocument();
 
             //Act
             var actual = sut.UploadToAsposeCloud(filePath);
@@ -62,7 +62,7 @@ namespace Apose_PDF_Generator.Test
             //Arrange
             var sut = GreateAsposeApi();
             const string fileName = "Aspose_by_Siphenathi_2.pdf";
-            var downloadedPdf = Common.GetDirectoryToStoreTheDocumentFromTheCloud();
+            var downloadedPdf = FileRouteFinder.GetDirectoryToStoreTheDocumentFromTheCloud();
 
             //Act 
             var actual = sut.DownloadDocumentFromTheCloud(fileName, downloadedPdf);
@@ -83,7 +83,7 @@ namespace Apose_PDF_Generator.Test
             const string expected = "Invalid file name";
 
             //Act 
-            var actual =  sut.DownloadDocumentFromTheCloud(fileName, Common.GetDirectoryToStoreTheDocumentFromTheCloud());
+            var actual =  sut.DownloadDocumentFromTheCloud(fileName, FileRouteFinder.GetDirectoryToStoreTheDocumentFromTheCloud());
             
             Assert.AreEqual(expected, actual.ErrorMessage);
         }
@@ -97,7 +97,7 @@ namespace Apose_PDF_Generator.Test
             const string expected = "File you looking for does not exist, check filename and try again";
 
             //Act 
-            var actual = sut.DownloadDocumentFromTheCloud(fileName, Common.GetDirectoryToStoreTheDocumentFromTheCloud());
+            var actual = sut.DownloadDocumentFromTheCloud(fileName, FileRouteFinder.GetDirectoryToStoreTheDocumentFromTheCloud());
 
 
             Assert.AreEqual(expected, actual.ErrorMessage);
@@ -115,23 +115,6 @@ namespace Apose_PDF_Generator.Test
             var actual = sut.UpdateSingleFieldOfTheDocumentOnAsposeCloud(filename,fieldname,value);
             
             
-
-            //Assert
-            Assert.AreEqual("OK", actual.Status);
-            Assert.AreEqual(value.ElementAt(0), actual.Field.Values.ElementAt(0));
-        }
-
-        [Test]
-        [Ignore("This test is expected to fail but it's passing due to Api failing to recognize readonly fields")]
-        public void UpdateSingleFieldOfTheDocumentOnAsposeCloud_GivenFilename_ReadOnlyField_And_value_ShouldThrowExceptionNotUpdate()
-        {
-            var sut = GreateAsposeApi();
-            const string filename = "Aspose_by_Siphenathi_2.pdf";
-            const string fieldname = "Total_Net_Income";
-            var value = new List<string> { "Value" };
-
-            //Act
-            var actual = sut.UpdateSingleFieldOfTheDocumentOnAsposeCloud(filename, fieldname, value);
 
             //Assert
             Assert.AreEqual("OK", actual.Status);
@@ -159,8 +142,8 @@ namespace Apose_PDF_Generator.Test
         {
             //Arrange
             var sut = GreateAsposeApi();
-            const string formFile = @"C:\Users\SiphenathiP\source\repos\Apose_PDF_Generator\Apose_PDF_Generator.Test\bin\Debug\Documents\Aspose_by_Siphenathi_2.pdf";
-            const string newFilePath = @"C:\Users\SiphenathiP\source\repos\Apose_PDF_Generator\Apose_PDF_Generator.Test\bin\Debug\Documents\Aspose_by_Siphenathi_2(Readonly).pdf";
+             var formFile = FileRouteFinder.GetDirectoryOfTheMainDocument();
+             var newFilePath = FileRouteFinder.GetDirectoryToStoreTheDocumentWithDisableProperties();
 
             var fieldsToDisable = new List<string> { "Date_of_Birth", "First_Name", "Surname" };
 

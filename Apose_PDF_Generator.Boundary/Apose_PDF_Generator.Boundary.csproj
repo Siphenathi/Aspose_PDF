@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62638538-3F81-4513-89B5-348797D3D020}</ProjectGuid>
+    <ProjectGuid>{534B84D2-425D-4DCA-8529-838C12CC8242}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Apose_PDF_Generator.Service</RootNamespace>
-    <AssemblyName>Apose_PDF_Generator.Service</AssemblyName>
+    <RootNamespace>Apose_PDF_Generator.Boundary</RootNamespace>
+    <AssemblyName>Apose_PDF_Generator.Boundary</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,17 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.PDF, Version=18.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.PDF.18.6.0\lib\net40-client\Aspose.PDF.dll</HintPath>
-    </Reference>
     <Reference Include="Aspose.Pdf.Cloud.Sdk, Version=18.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.Pdf-Cloud.18.5.0\lib\net4.5\Aspose.Pdf.Cloud.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="Aspose.Storage.Cloud.Sdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.Storage-Cloud.18.3.0\lib\net20\Aspose.Storage.Cloud.Sdk.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -49,7 +43,6 @@
       <HintPath>..\packages\RestSharp.106.2.2\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -60,26 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsposePdfApi.cs" />
-    <Compile Include="FileRouteFinder.cs" />
     <Compile Include="IAsposePdfApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Documents\Aspose_by_Siphenathi_2.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DownloadedDocuments\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apose_PDF_Generator.Model\Apose_PDF_Generator.Model.csproj">
       <Project>{94DCEF6B-5336-41DA-8588-66DECA243C68}</Project>
       <Name>Apose_PDF_Generator.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

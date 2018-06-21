@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DownloadResultsModel.cs" />
-    <Compile Include="UploadResultsModel.cs" />
+    <Compile Include="DownloadResultsTransferObject.cs" />
+    <Compile Include="UploadResultsTransferObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
