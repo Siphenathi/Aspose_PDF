@@ -12,8 +12,13 @@ namespace Apose_PDF_Generator.Service
     {
         public static string GetDataDirectory()
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory + "\\Documents\\Aspose_by_Siphenathi_2.pdf"; 
+            var path = AppDomain.CurrentDomain.BaseDirectory + "Documents\\Aspose_by_Siphenathi_2.pdf"; 
             return path;
+        }
+        public static string GetDirectoryToStoreTheDocumentFromTheCloud()
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "Documents\\Document.pdf";
+            return path;                        
         }
     }
 }

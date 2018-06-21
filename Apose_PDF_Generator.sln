@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator.Test", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator.Service", "Apose_PDF_Generator.Business\Apose_PDF_Generator.Service.csproj", "{62638538-3F81-4513-89B5-348797D3D020}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apose_PDF_Generator.Model", "Apose_PDF_Generator.Model\Apose_PDF_Generator.Model.csproj", "{94DCEF6B-5336-41DA-8588-66DECA243C68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{62638538-3F81-4513-89B5-348797D3D020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62638538-3F81-4513-89B5-348797D3D020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62638538-3F81-4513-89B5-348797D3D020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94DCEF6B-5336-41DA-8588-66DECA243C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94DCEF6B-5336-41DA-8588-66DECA243C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94DCEF6B-5336-41DA-8588-66DECA243C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94DCEF6B-5336-41DA-8588-66DECA243C68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

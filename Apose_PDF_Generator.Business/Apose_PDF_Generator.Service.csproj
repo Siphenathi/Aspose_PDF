@@ -49,6 +49,7 @@
       <HintPath>..\packages\RestSharp.106.2.2\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +62,7 @@
   <ItemGroup>
     <Compile Include="AsposePdfApi.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="IAsposePdfApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +71,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DownloadedDocuments\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Apose_PDF_Generator.Model\Apose_PDF_Generator.Model.csproj">
+      <Project>{94DCEF6B-5336-41DA-8588-66DECA243C68}</Project>
+      <Name>Apose_PDF_Generator.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,60 +1,107 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using Apose_PDF_Generator.Model;
 using Aspose.Pdf.Cloud.Sdk.Api;
 using Aspose.Pdf.Cloud.Sdk.Model;
 using Aspose.Storage.Cloud.Sdk.Api;
 using Aspose.Storage.Cloud.Sdk.Model;
 using Aspose.Storage.Cloud.Sdk.Model.Requests;
 using iTextSharp.text.pdf;
+using RestSharp.Extensions;
 
 namespace Apose_PDF_Generator.Service
 {
-    public class AsposePdfApi
+    public class AsposePdfApi : IAsposePdfApi
     {
-        protected const string APIKEY = "10311b1bb7f25457692006a82bd78856";
-        protected const string APPSID = "14024f73-3bde-492c-aab1-7bea7de60548";
-
-        private readonly StorageApi _storageApi = new StorageApi(APIKEY, APPSID);
-        private readonly PdfApi _target = new PdfApi(APIKEY, APPSID);
+        private readonly StorageApi _storageApi;
+        private readonly PdfApi _target;
         public AsposePdfApi()
         {
+            var apiKey = ConfigurationManager.AppSettings["_apiKey"];
+            var appSid = ConfigurationManager.AppSettings["_appSid"];
+            _storageApi = new StorageApi(apiKey, appSid);
+            _target = new PdfApi(apiKey, appSid);
 
         }
-
-        public UploadResponse UploadToAsposeCloud(string path)
+        public UploadResultsModel UploadToAsposeCloud(string path)
         {
+            var results = new UploadResultsModel();
+            if (Invalid(path))
+            {
+                results.ErrorMessage = "Invalid file path";
+                return results;
+            }
             var name = GetFileName(path);
-            dynamic response;
+
+            if (FileDoesNotExists(path))
+            {
+                results.ErrorMessage = "File path you looking for does not exist, check path name and try again";
+                return results;
+            }
 
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 var request = new PutCreateRequest(name, stream);
-                response = _storageApi.PutCreate(request);
+                results.UploadResults = _storageApi.PutCreate(request);
             }
-            return response;
+            return results;
         }
-
-        public Stream GetDocument()
+        public DownloadResultsModel DownloadDocumentFromTheCloud(string name, string path)
         {
-             const string name = "Aspose_by_Siphenathi_2.pdf";
-  
-            var response = _target.GetDocument(name, null, null);
+            var results = new DownloadResultsModel();
 
-            const string fileFullPath = "J:\\PDF from the cloud";
+            if (Invalid(name))
+            {
+                results.ErrorMessage = "Invalid file name";
+                return results;
+            }
+            var request = new GetDownloadRequest(name);
+            using (var response = _storageApi.GetDownload(request))
+            {
+                if (response == null)
+                {
+                    results.ErrorMessage = "File you looking for does not exist, check filename and try again";
+                    return results;
+                }
+                results.Bytes = response.ReadAsBytes();
+                File.WriteAllBytes(path, results.Bytes);
+            }
 
-            var fileStream = File.Create(fileFullPath, (int)response.Length);
+            return results;
+        }
+        public FieldResponse UpdateSingleFieldOfTheDocumentOnAsposeCloud(string fileName, string fieldName, List<string> value)
+        {
+            var body = new Field
+            {
+                Name = fieldName,
+                Values = value
+            };
+            var apiResponse = _target.PutUpdateField(fileName, fieldName, body);
 
-            // Initialize the bytes array with the stream length and then fill it with data
-            var bytesInStream = new byte[response.Length];
-            response.Read(bytesInStream, 0, bytesInStream.Length);
+            return apiResponse;
+        }
+        public FieldsResponse UpdateMultipleFileInAsposeCloud(string fileName, Fields asposeFields)
+        {
+            var apiResponse = _target.PutUpdateFields(fileName, asposeFields);
+            return apiResponse;
+        }
+        public void DisableFields(string originalFilePath, string newFile, List<string> fieldsToDisable)
+        {
+            var reader = new PdfReader(originalFilePath);
 
-            // Use write method to write to the file specified above
-            fileStream.Write(bytesInStream, 0, bytesInStream.Length);
-
-
+            using (var stamper = new PdfStamper(reader, new FileStream(newFile, FileMode.Create)))
+            {
+                SetToReadonly(fieldsToDisable, stamper);
+                stamper.Close();
+            }
+        }
+        public RemoveFileResponse DeleteFileInCloud(string fileName)
+        {
+            var request = new DeleteFileRequest(fileName);
+            var response = _storageApi.DeleteFile(request);
             return response;
         }
-
         private static string GetFileName(string path)
         {
             var startPoint = 0;
@@ -68,42 +115,27 @@ namespace Apose_PDF_Generator.Service
             var name = path.Substring(startPoint + 1);
             return name;
         }
-
-        public FieldResponse UpdateSingleFieldOfTheDocumentOnAsposeCloud(string fileName, string fieldName, List<string> value)
+        private static bool Invalid(string path)
         {
-            var body = new Field
-            {
-                Name = fieldName,
-                Values = value
-            };
-            var apiResponse = _target.PutUpdateField(fileName, fieldName, body);
-
-            return apiResponse;
+            return string.IsNullOrWhiteSpace(path);
         }
-
-        public FieldsResponse UpdateMultipleFileInAsposeCloud(string fileName, Fields asposeFields)
+        private static bool FileDoesNotExists(string path)
         {
-            var apiResponse = _target.PutUpdateFields(fileName, asposeFields);
-            return apiResponse;
+            return !File.Exists(path);
         }
-
-        public void DisableFields(string originalFilePath, string newFile)
+        private static void SetToReadonly(IEnumerable<string> fieldsToDisable, PdfStamper stamper)
         {
-            var reader = new PdfReader(originalFilePath);
+            var fields = stamper.AcroFields;
 
-            using (var stamper = new PdfStamper(reader, new FileStream(newFile, FileMode.Create)))
+            foreach (var field in fieldsToDisable)
             {
-                var fields = stamper.AcroFields;
-
-                fields.SetFieldProperty("Date_Of_Birth", "setfflags", PdfFormField.FF_READ_ONLY, null);
-                fields.SetFieldProperty("First_Name", "setfflags", PdfFormField.FF_READ_ONLY, null);
-                fields.SetFieldProperty("Surname", "setfflags", PdfFormField.FF_READ_ONLY, null);
-
-                stamper.Close();
+                fields.SetFieldProperty(field, "setfflags", PdfFormField.FF_READ_ONLY, null);
             }
+
         }
+        
     }
 }
 
 
-    
+
